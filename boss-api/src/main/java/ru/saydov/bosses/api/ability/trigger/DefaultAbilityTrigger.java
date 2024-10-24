@@ -1,4 +1,4 @@
-package ru.saydov.bosses.api.boss.ability.trigger;
+package ru.saydov.bosses.api.ability.trigger;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import org.bukkit.entity.LivingEntity;
 @Getter
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public enum AbilityTrigger {
+public enum DefaultAbilityTrigger {
 
     TIME_ELAPSED(entity -> true),
     LOW_HEALTH(entity -> true),

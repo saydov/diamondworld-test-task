@@ -2,12 +2,9 @@ package ru.saydov.bosses.api.entity.impl;
 
 import com.comphenix.protocol.wrappers.WrappedDataWatcher;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NonNull;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
-import lombok.val;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
@@ -31,9 +28,11 @@ import java.util.UUID;
  * @author saydov
  */
 @Getter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public abstract class PacketEntityBaseImpl implements PacketEntity {
 
+    @EqualsAndHashCode.Include
     @NonFinal @NotNull Location location;
 
     int entityId;

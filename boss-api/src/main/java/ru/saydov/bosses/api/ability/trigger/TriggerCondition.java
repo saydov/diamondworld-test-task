@@ -1,4 +1,4 @@
-package ru.saydov.bosses.api.boss.ability.trigger;
+package ru.saydov.bosses.api.ability.trigger;
 
 import lombok.NonNull;
 import org.bukkit.entity.LivingEntity;

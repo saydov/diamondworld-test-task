@@ -67,7 +67,7 @@ public final class BossApi implements Loadable {
     private void initSQLite0() {
         val file = javaPlugin.getDataFolder()
                 .toPath()
-                .resolve("database.db")
+                .resolve(generalConfig.getDatabaseFileName())
                 .toFile();
 
         if (!file.exists()) file.mkdir();

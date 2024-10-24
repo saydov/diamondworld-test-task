@@ -7,10 +7,12 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import ru.saydov.bosses.api.config.locale.Message;
 import ru.saydov.bosses.api.config.locale.SimpleMultiMessage;
 import ru.saydov.bosses.api.config.locale.SimpleSingleMessage;
+import ru.saydov.bosses.api.config.settings.BossSettings;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,32 +23,39 @@ import java.util.Optional;
  * @author saydov
  */
 @Getter
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE, onConstructor_ = @NonNull)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public final class SimpleGeneralConfig implements GeneralConfig {
 
-    JavaPlugin plugin;
+    JavaPlugin javaPlugin;
 
-    public static @NotNull SimpleGeneralConfig create(
-            final @NonNull JavaPlugin plugin
-    ) {
+    @NonFinal Map<String, Message> messages;
+
+    @NonFinal FileConfiguration configuration;
+
+    @NonFinal String databaseFileName;
+
+    @NonFinal BossSettings bossSettings;
+
+    public static @NotNull SimpleGeneralConfig create(final @NonNull JavaPlugin plugin) {
         return new SimpleGeneralConfig(plugin);
     }
-
-    @NonFinal
-    Map<String, Message> messages;
 
     @Override
     public @Unmodifiable @NotNull Map<String, Message> getMessages() {
         return messages;
     }
 
-    @SuppressWarnings("ConstantConditions")
-    private void loadMessages0(final @NonNull ConfigurationSection section) {
+    private void loadMessages0(final @Nullable ConfigurationSection section) {
+        if (section == null) return;
+
         val messages = new HashMap<String, Message>();
 
         for (val key : section.getKeys(false)) {
-            messages.put(key, _loadMessage(section.get(key)));
+            Object obj = section.get(key);
+            if (obj == null) continue;
+
+            messages.put(key, loadMessage0(obj));
         }
 
         this.messages = messages;
@@ -71,7 +80,7 @@ public final class SimpleGeneralConfig implements GeneralConfig {
     }
 
     @SuppressWarnings("unchecked")
-    private @NotNull Message _loadMessage(final @NonNull Object obj) {
+    private @NotNull Message loadMessage0(final @NonNull Object obj) {
         if (obj instanceof String) {
             return SimpleSingleMessage.create((String) obj);
         }
@@ -83,21 +92,32 @@ public final class SimpleGeneralConfig implements GeneralConfig {
         throw new IllegalArgumentException("Unknown message type");
     }
 
-    @NonFinal
-    FileConfiguration configuration;
+    private void loadDatabase0(final @Nullable ConfigurationSection section) {
+        if (section == null) return;
+
+        databaseFileName = section.getString("file");
+    }
+
+    private void loadBosses(final @Nullable ConfigurationSection section) {
+        if (section == null) return;
+
+        bossSettings = BossSettings.create(javaPlugin, section);
+    }
 
     @Override
     @SuppressWarnings("ConstantConditions")
     public void load() {
-        plugin.saveDefaultConfig();
-        configuration = plugin.getConfig();
+        javaPlugin.saveDefaultConfig();
+        configuration = javaPlugin.getConfig();
 
         loadMessages0(configuration.getConfigurationSection("messages"));
+        loadDatabase0(configuration.getConfigurationSection("database"));
+        loadBosses(configuration.getConfigurationSection("bosses"));
     }
 
     @Override
     public void unload() {
-
+        messages.clear();
     }
 
 }

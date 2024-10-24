@@ -5,7 +5,7 @@ package ru.saydov.bosses.api.entity.interfaces;
  */
 public interface PacketArmorStand {
 
-    void isSmall();
+    boolean isSmall();
 
     void setSmall(final boolean small);
 

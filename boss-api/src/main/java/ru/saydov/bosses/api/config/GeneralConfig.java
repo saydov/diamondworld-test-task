@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 import ru.saydov.bosses.api.config.locale.Message;
+import ru.saydov.bosses.api.config.settings.BossSettings;
 import ru.saydov.bosses.api.utils.Loadable;
 
 import java.util.Map;
@@ -22,5 +23,9 @@ public interface GeneralConfig extends Loadable {
     @NotNull Message getMessage(final @NonNull String key);
 
     @NotNull FileConfiguration getConfiguration();
+
+    @NotNull String getDatabaseFileName();
+
+    @NotNull BossSettings getBossSettings();
 
 }

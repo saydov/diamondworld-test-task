@@ -18,10 +18,12 @@ import java.util.Set;
  * @author saydov
  */
 @Getter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SimpleHologram implements Hologram {
 
+    @EqualsAndHashCode.Include
     @NotNull Location location;
 
     @NotNull List<HologramLine> hologramLines;
