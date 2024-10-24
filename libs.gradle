@@ -1,0 +1,26 @@
+def JDBI_VERSION = "3.45.1"
+def LITECOMMANDS_VERSION = "3.7.0"
+
+ext {
+    libs = [
+            "lombok"     : "org.projectlombok:lombok:1.18.22",
+            "cache"      : "com.github.ben-manes.caffeine:caffeine:2.9.1",
+            "guice"      : "com.google.inject:guice:5.0.1",
+            "bukkit"     : "io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT",
+            "protocollib": "com.comphenix.protocol:ProtocolLib:5.0.0",
+            "hikari"     : "com.zaxxer:HikariCP:4.0.3"
+    ]
+
+    libs.litecommands = [
+            "core"       : "dev.rollczi:litecommands-core:${LITECOMMANDS_VERSION}",
+            "bukkit"     : "dev.rollczi:litecommands-bukkit:${LITECOMMANDS_VERSION}"
+    ]
+
+    libs.jdbi = [
+            "core"       : "org.jdbi:jdbi3-core:${JDBI_VERSION}",
+            "sql2o"      : "org.jdbi:jdbi3-sqlobject:${JDBI_VERSION}",
+            "caffeine"   : "org.jdbi:jdbi3-caffeine-cache:${JDBI_VERSION}"
+
+    ]
+
+}

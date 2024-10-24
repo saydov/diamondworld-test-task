@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group = 'net.forcemine.clans'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+
+    maven { url "https://papermc.io/repo/repository/maven-public/" }
+}
+
+
+
+test {
+    useJUnitPlatform()
+}

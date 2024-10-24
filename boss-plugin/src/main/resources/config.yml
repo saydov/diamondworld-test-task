@@ -1,0 +1,49 @@
+database:
+  file: "database.db"
+
+bosses:
+  summoner:
+    entity-type: ZOMBIE
+    max-health: 1500
+    damage: 20
+    locations:
+      - 'world, 0, 100, 0' # без yaw, pitch
+      - 'world, 0, 100, 0, 0, 0' # с yaw, pitch
+    equipment:
+      HELMET:
+        material: 'DIAMOND_HELMET'
+        enchantments:
+          PROTECTION_ENVIRONMENTAL: 4
+          DURABILITY: 3
+    attack-entities:
+      - "PLAYER"
+      - "WOLF"
+      - "PARROT"
+      - "OCELOT"
+    abilities:
+      summoners:
+        count: '1-3'
+        entity-type: ZOMBIE
+        baby: true
+  destroyer:
+    entity-type: ZOMBIE
+    max-health: 1000
+    damage: 70
+    locations:
+      - 'world, 0, 100, 0' # без yaw, pitch
+      - 'world, 0, 100, 0, 0, 0' # с yaw, pitch
+    equipment:
+      MAIN:
+        material: 'DIAMOND_HELMET'
+        enchantments:
+          PROTECTION_ENVIRONMENTAL: 4
+          DURABILITY: 3
+    attack-entities:
+      - "PLAYER"
+    abilities:
+      summoners:
+        count: '1-3'
+        entity-type: ZOMBIE
+        baby: true
+
+messages:

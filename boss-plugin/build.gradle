@@ -1,0 +1,26 @@
+repositories {
+    maven { url "https://repo.panda-lang.org/releases" }
+}
+
+dependencies {
+    implementation project(":boss-api")
+
+    implementation libs.litecommands.core
+    implementation libs.litecommands.bukkit
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "main", "ru.saydov.bosses.plugin"
+
+    filesMatching("plugin.yml") {
+        expand "version": project.version
+    }
+}
+
+tasks {
+    shadowJar {
+        archiveFileName = 'BossesPlugin.jar'
+        destinationDirectory = file("../../Desktop/test-server/plugins")
+    }
+}

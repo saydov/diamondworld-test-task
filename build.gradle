@@ -1,0 +1,75 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "7.0.0" apply false
+}
+
+allprojects {
+    group = 'ru.saydov.bosses'
+    version = '1.0.0-SNAPSHOT'
+}
+
+configure(subprojects) {
+    apply plugin: "java"
+    apply plugin: "java-library"
+    apply plugin: "com.github.johnrengelman.shadow"
+
+    apply from: new File(rootDir, "libs.gradle")
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+
+        maven { url "https://papermc.io/repo/repository/maven-public/" }
+        maven { url "https://repo.dmulloy2.net/repository/public/" }
+    }
+
+    dependencies {
+        compileOnly libs.bukkit
+        compileOnly libs.protocollib
+
+        implementation libs.jdbi.core
+        implementation libs.jdbi.sql2o
+        implementation libs.jdbi.caffeine
+
+        implementation libs.hikari
+
+        implementation libs.cache
+        implementation libs.guice
+
+        compileOnly libs.lombok
+        annotationProcessor libs.lombok
+    }
+
+    tasks {
+        shadowJar {
+            exclude 'META-INF/DEPENDENCIES'
+            exclude 'META-INF/LICENSE'
+            exclude 'META-INF/LICENSE.txt'
+            exclude 'META-INF/NOTICE'
+            exclude 'META-INF/NOTICE.txt'
+            exclude 'META-INF/maven/**'
+
+            mergeServiceFiles {
+                include 'META-INF/impl/**'
+            }
+        }
+
+        tasks.withType(JavaCompile).configureEach {
+            options.encoding = 'UTF-8'
+        }
+
+        test {
+            useJUnitPlatform()
+        }
+    }
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    tasks {
+        build {
+            dependsOn(shadowJar)
+        }
+    }
+}

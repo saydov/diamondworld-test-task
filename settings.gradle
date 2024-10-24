@@ -1,0 +1,6 @@
+rootProject.name = 'DiamondWorld Test Task'
+
+include 'boss-api'
+
+include 'boss-plugin'
+
