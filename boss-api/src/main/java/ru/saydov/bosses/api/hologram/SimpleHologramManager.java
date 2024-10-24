@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnmodifiableView;
 import ru.saydov.bosses.api.hologram.model.Hologram;
 import ru.saydov.bosses.api.utils.Manager;
@@ -19,15 +20,15 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public final class SimpleHologramManager implements Manager<Hologram> {
 
-    @NonNull
+    @NotNull
     Set<Hologram> holograms;
 
-    public static @NonNull Manager<Hologram> create() {
+    public static @NotNull Manager<Hologram> create() {
         return new SimpleHologramManager(new ObjectOpenHashSet<>());
     }
 
     @Override
-    public @NonNull @UnmodifiableView Set<Hologram> getEntities() {
+    public @NotNull @UnmodifiableView Set<Hologram> getEntities() {
         return Collections.unmodifiableSet(holograms);
     }
 

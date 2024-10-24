@@ -6,6 +6,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -16,9 +17,9 @@ import java.util.Optional;
  */
 public interface Boss {
 
-    @NonNull Location getLocation();
+    @NotNull Location getLocation();
 
-    @NonNull EntityType getEntityType();
+    @NotNull EntityType getEntityType();
 
     @Nullable String getCustomName();
 
@@ -32,11 +33,11 @@ public interface Boss {
 
     void delete();
 
-    @NonNull Map<EquipmentSlot, ItemStack> getEquipment();
+    @NotNull Map<EquipmentSlot, ItemStack> getEquipment();
 
     boolean setEquipment(final @NonNull Map<EquipmentSlot, ItemStack> equip);
 
-    @NonNull Optional<LivingEntity> getEntity();
+    @NotNull Optional<LivingEntity> getEntity();
 
 
 

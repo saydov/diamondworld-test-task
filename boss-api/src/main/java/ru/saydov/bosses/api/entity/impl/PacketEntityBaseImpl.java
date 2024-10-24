@@ -12,6 +12,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
 import ru.saydov.bosses.api.entity.interfaces.PacketEntity;
@@ -33,15 +34,15 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public abstract class PacketEntityBaseImpl implements PacketEntity {
 
-    @NonFinal @NonNull Location location;
+    @NonFinal @NotNull Location location;
 
     int entityId;
 
-    @NonNull UUID entityUUID;
+    @NotNull UUID entityUUID;
 
-    @NonNull WrappedDataWatcher dataWatcher;
+    @NotNull WrappedDataWatcher dataWatcher;
 
-    @NonNull Set<Player> players;
+    @NotNull Set<Player> players;
 
     protected PacketEntityBaseImpl(final @NonNull Location location) {
         this.location = location;
@@ -64,9 +65,9 @@ public abstract class PacketEntityBaseImpl implements PacketEntity {
         // будет переопределить этот метод)
     }
 
-    @NonNull EntityType entityType;
+    @NotNull EntityType entityType;
 
-    public abstract @NonNull EntityType getEntityType();
+    public abstract @NotNull EntityType getEntityType();
 
     @Override
     public void teleport(@NonNull Location location) {
@@ -144,7 +145,7 @@ public abstract class PacketEntityBaseImpl implements PacketEntity {
     }
 
     @Override
-    public @NonNull @UnmodifiableView Set<Player> getViewers() {
+    public @NotNull @UnmodifiableView Set<Player> getViewers() {
         return Collections.unmodifiableSet(players);
     }
 

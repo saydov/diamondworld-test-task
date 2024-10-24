@@ -1,6 +1,7 @@
 package ru.saydov.bosses.api.utils;
 
 import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnmodifiableView;
 
 import java.util.Set;
@@ -10,7 +11,7 @@ import java.util.Set;
  */
 public interface Manager<E> {
 
-    @NonNull @UnmodifiableView Set<E> getEntities();
+    @NotNull @UnmodifiableView Set<E> getEntities();
 
     void registerEntity(final @NonNull E entity);
 

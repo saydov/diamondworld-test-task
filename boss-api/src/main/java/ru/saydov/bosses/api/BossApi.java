@@ -10,12 +10,13 @@ import org.jdbi.v3.cache.caffeine.CaffeineCachePlugin;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.async.JdbiExecutor;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
+import org.jetbrains.annotations.NotNull;
 import ru.saydov.bosses.api.boss.SimpleBossManager;
 import ru.saydov.bosses.api.boss.model.Boss;
 import ru.saydov.bosses.api.config.GeneralConfig;
 import ru.saydov.bosses.api.config.SimpleGeneralConfig;
-import ru.saydov.bosses.api.entity.interfaces.PacketEntity;
 import ru.saydov.bosses.api.entity.SimpleEntityManager;
+import ru.saydov.bosses.api.entity.interfaces.PacketEntity;
 import ru.saydov.bosses.api.hologram.SimpleHologramManager;
 import ru.saydov.bosses.api.hologram.model.Hologram;
 import ru.saydov.bosses.api.utils.Loadable;
@@ -33,9 +34,9 @@ import java.util.concurrent.Executors;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public final class BossApi implements Loadable {
 
-    @NonNull JavaPlugin javaPlugin;
+    @NotNull JavaPlugin javaPlugin;
 
-    public static @NonNull BossApi create(final @NonNull JavaPlugin javaPlugin) {
+    public static @NotNull BossApi create(final @NonNull JavaPlugin javaPlugin) {
         return new BossApi(javaPlugin);
     }
 
@@ -47,6 +48,10 @@ public final class BossApi implements Loadable {
 
     @NonFinal GeneralConfig generalConfig;
 
+    @NonFinal Jdbi jdbi;
+
+    @NonFinal JdbiExecutor executor;
+
     @Override
     public void load() {
         this.hologramManager = SimpleHologramManager.create();
@@ -57,10 +62,6 @@ public final class BossApi implements Loadable {
         NmsUtil.init(javaPlugin);
         initSQLite0();
     }
-
-    @NonFinal Jdbi jdbi;
-
-    @NonFinal JdbiExecutor executor;
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     private void initSQLite0() {

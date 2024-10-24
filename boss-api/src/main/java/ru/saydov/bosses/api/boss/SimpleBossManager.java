@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnmodifiableView;
 import ru.saydov.bosses.api.boss.model.Boss;
 import ru.saydov.bosses.api.utils.Manager;
@@ -19,14 +20,14 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public final class SimpleBossManager implements Manager<Boss> {
 
-    @NonNull Set<Boss> bosses;
+    @NotNull Set<Boss> bosses;
 
-    public static @NonNull Manager<Boss> create() {
+    public static @NotNull Manager<Boss> create() {
         return new SimpleBossManager(new ObjectOpenHashSet<>());
     }
 
     @Override
-    public @NonNull @UnmodifiableView Set<Boss> getEntities() {
+    public @NotNull @UnmodifiableView Set<Boss> getEntities() {
         return Collections.unmodifiableSet(bosses);
     }
 

@@ -6,6 +6,7 @@ import lombok.experimental.NonFinal;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 import ru.saydov.bosses.api.config.locale.Message;
 import ru.saydov.bosses.api.config.locale.SimpleMultiMessage;
@@ -26,7 +27,7 @@ public final class SimpleGeneralConfig implements GeneralConfig {
 
     JavaPlugin plugin;
 
-    public static @NonNull SimpleGeneralConfig create(
+    public static @NotNull SimpleGeneralConfig create(
             final @NonNull JavaPlugin plugin
     ) {
         return new SimpleGeneralConfig(plugin);
@@ -36,8 +37,7 @@ public final class SimpleGeneralConfig implements GeneralConfig {
     Map<String, Message> messages;
 
     @Override
-    @Unmodifiable
-    public @NonNull Map<String, Message> getMessages() {
+    public @Unmodifiable @NotNull Map<String, Message> getMessages() {
         return messages;
     }
 
@@ -53,7 +53,7 @@ public final class SimpleGeneralConfig implements GeneralConfig {
     }
 
     @Override
-    public @NonNull Optional<Message> findMessage(@NonNull String key) {
+    public @NotNull Optional<Message> findMessage(@NonNull String key) {
         val message = messages.get(key);
         if (message == null) return Optional.of(SimpleSingleMessage.create("Message with key " + key + " not found"));
 
@@ -66,12 +66,12 @@ public final class SimpleGeneralConfig implements GeneralConfig {
     }
 
     @Override
-    public @NonNull Message getMessage(@NonNull String key) {
+    public @NotNull Message getMessage(@NonNull String key) {
         return messages.getOrDefault(key, SimpleSingleMessage.create("Message with key " + key + " not found"));
     }
 
     @SuppressWarnings("unchecked")
-    private @NonNull Message _loadMessage(final @NonNull Object obj) {
+    private @NotNull Message _loadMessage(final @NonNull Object obj) {
         if (obj instanceof String) {
             return SimpleSingleMessage.create((String) obj);
         }

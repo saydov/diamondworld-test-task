@@ -2,6 +2,7 @@ package ru.saydov.bosses.api.config.locale;
 
 import lombok.NonNull;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -10,13 +11,13 @@ import java.util.List;
  */
 public interface Message {
 
-    List<@NonNull String> getLines();
+    List<@NotNull String> getLines();
 
-    @NonNull String getJoinedLines();
+    @NotNull String getJoinedLines();
 
-    @NonNull String asSingleLine();
+    @NotNull String asSingleLine();
 
-    @NonNull Message format(final @NonNull Object... args);
+    @NotNull Message format(final @NonNull Object... args);
 
     void send(final @NonNull CommandSender sender);
 

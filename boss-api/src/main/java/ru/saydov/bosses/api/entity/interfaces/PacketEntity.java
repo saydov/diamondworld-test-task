@@ -5,6 +5,7 @@ import lombok.NonNull;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnmodifiableView;
 
 import javax.annotation.Nullable;
@@ -17,21 +18,22 @@ import java.util.UUID;
  */
 public interface PacketEntity {
 
-    @NonNull Location getLocation();
+    @NotNull Location getLocation();
     void teleport(final @NonNull Location location);
 
-    @NonNull UUID getEntityUUID();
+    @NotNull UUID getEntityUUID();
     int getEntityId();
-    @NonNull EntityType getEntityType();
+    @NotNull EntityType getEntityType();
 
-    @NonNull WrappedDataWatcher getDataWatcher();
+    @NotNull WrappedDataWatcher getDataWatcher();
 
     void setCustomName(final @Nullable String name);
     @Nullable String getCustomName();
     boolean isCustomNameVisible();
     void setCustomNameVisible(final boolean visible);
 
-    @NonNull @UnmodifiableView Set<Player> getViewers();
+    @NotNull
+    @UnmodifiableView Set<Player> getViewers();
 
     default void addViewers(final @NonNull Player... players) {
         for (final Player player : players) {

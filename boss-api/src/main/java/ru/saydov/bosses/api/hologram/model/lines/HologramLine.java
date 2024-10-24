@@ -3,6 +3,7 @@ package ru.saydov.bosses.api.hologram.model.lines;
 import lombok.NonNull;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import ru.saydov.bosses.api.entity.interfaces.PacketEntity;
 import ru.saydov.bosses.api.hologram.model.Hologram;
 
@@ -11,9 +12,9 @@ import ru.saydov.bosses.api.hologram.model.Hologram;
  */
 public interface HologramLine {
 
-    @NonNull PacketEntity getEntity();
-    @NonNull Hologram getHologram();
-    @NonNull Location getLocation();
+    @NotNull PacketEntity getEntity();
+    @NotNull Hologram getHologram();
+    @NotNull Location getLocation();
 
     double getLineModifier();
 

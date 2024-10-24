@@ -3,6 +3,7 @@ package ru.saydov.bosses.api.hologram.model;
 import lombok.NonNull;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnmodifiableView;
 import ru.saydov.bosses.api.hologram.model.lines.HologramLine;
 
@@ -14,9 +15,9 @@ import java.util.Set;
  */
 public interface Hologram {
 
-    @NonNull Location getLocation();
+    @NotNull Location getLocation();
 
-    @NonNull @UnmodifiableView List<HologramLine> getLines();
+    @NotNull @UnmodifiableView List<HologramLine> getLines();
 
     void addLine(final @NonNull HologramLine hologramLine);
 
@@ -28,7 +29,7 @@ public interface Hologram {
 
     void clearLines();
 
-    @NonNull @UnmodifiableView Set<Player> getViewers();
+    @NotNull @UnmodifiableView Set<Player> getViewers();
 
     void showTo(final @NonNull Player player);
 

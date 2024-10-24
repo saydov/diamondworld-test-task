@@ -13,6 +13,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import ru.saydov.bosses.api.BossApi;
 import ru.saydov.bosses.api.entity.impl.PacketArmorStandImpl;
 import ru.saydov.bosses.api.entity.interfaces.PacketEntity;
@@ -27,7 +28,7 @@ public class TestCommand {
 
     BossApi bossApi;
 
-    public static @NonNull TestCommand create(final @NonNull BossApi bossApi) {
+    public static @NotNull TestCommand create(final @NonNull BossApi bossApi) {
         return new TestCommand(bossApi);
     }
 
@@ -43,7 +44,7 @@ public class TestCommand {
                 .color(NamedTextColor.GREEN));
     }
 
-    private @NonNull PacketEntity createArmorStand(final @NonNull Location location) {
+    private @NotNull PacketEntity createArmorStand(final @NonNull Location location) {
         val impl = PacketArmorStandImpl.create(location);
 
         impl.setCustomNameVisible(true);

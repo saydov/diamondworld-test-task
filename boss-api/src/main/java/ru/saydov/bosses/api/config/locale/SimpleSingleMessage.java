@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,31 +18,30 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SimpleSingleMessage implements SingleMessage {
 
-    @NonNull
-    @NonFinal
+    @NotNull @NonFinal
     String message;
 
-    public static @NonNull SimpleSingleMessage create(final @NonNull String message) {
+    public static @NotNull SimpleSingleMessage create(final @NonNull String message) {
         return new SimpleSingleMessage(message);
     }
 
     @Override
-    public List<@NonNull String> getLines() {
+    public List<@NotNull String> getLines() {
         return Collections.singletonList(message);
     }
 
     @Override
-    public @NonNull String getJoinedLines() {
+    public @NotNull String getJoinedLines() {
         return message;
     }
 
     @Override
-    public @NonNull String asSingleLine() {
+    public @NotNull String asSingleLine() {
         return message;
     }
 
     @Override
-    public @NonNull Message format(final @NonNull Object... args) {
+    public @NotNull Message format(final @NonNull Object... args) {
         String cloned = message;
 
         for (int i = 0; i < args.length; i += 2) {

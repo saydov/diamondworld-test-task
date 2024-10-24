@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
+import org.jetbrains.annotations.NotNull;
 import ru.saydov.bosses.api.entity.interfaces.PacketArmorStand;
 import ru.saydov.bosses.api.entity.interfaces.PacketEntity;
 
@@ -17,16 +18,16 @@ public class PacketArmorStandImpl extends PacketEntityBaseImpl implements Packet
         super(location);
     }
 
-    public static @NonNull PacketEntity create(final @NonNull Location location) {
+    public static @NotNull PacketEntity create(final @NonNull Location location) {
         return new PacketArmorStandImpl(location);
     }
 
     @Override
-    public @NonNull EntityType getEntityType() {
+    public @NotNull EntityType getEntityType() {
         return EntityType.ARMOR_STAND;
     }
 
-    boolean small = false;
+    boolean small = false, invisible = true, arms = false;
 
     @Override
     public void setSmall(boolean small) {
@@ -35,8 +36,6 @@ public class PacketArmorStandImpl extends PacketEntityBaseImpl implements Packet
             sendMetadata();
         }
     }
-
-    boolean invisible = true;
 
     @Override
     public boolean isInvisible() {
@@ -50,8 +49,6 @@ public class PacketArmorStandImpl extends PacketEntityBaseImpl implements Packet
             sendMetadata();
         }
     }
-
-    boolean arms = false;
 
     @Override
     public boolean hasArms() {

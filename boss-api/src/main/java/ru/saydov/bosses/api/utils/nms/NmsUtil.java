@@ -6,6 +6,7 @@ import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.UtilityClass;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -36,7 +37,7 @@ public class NmsUtil {
     }
 
     @SneakyThrows
-    public @NonNull Class<?> getClazz(final @NonNull String name) {
+    public @NotNull Class<?> getClazz(final @NonNull String name) {
         return Class.forName("net.minecraft.server." + SERVER_VERSION + "." + name);
     }
 

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.val;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,29 +18,29 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SimpleMultiMessage implements MultiMessage {
 
-    @NonNull List<String> lines;
+    @NotNull List<String> lines;
 
-    public static @NonNull SimpleMultiMessage create(final @NonNull List<String> lines) {
+    public static @NotNull SimpleMultiMessage create(final @NonNull List<String> lines) {
         return new SimpleMultiMessage(lines);
     }
 
     @Override
-    public @NonNull List<@NonNull String> getLines() {
+    public @NotNull List<@NotNull String> getLines() {
         return lines;
     }
 
     @Override
-    public @NonNull String getJoinedLines() {
+    public @NotNull String getJoinedLines() {
         return String.join("\n", lines);
     }
 
     @Override
-    public @NonNull String asSingleLine() {
+    public @NotNull String asSingleLine() {
         return String.join(" ", lines);
     }
 
     @Override
-    public @NonNull Message format(final @NonNull Object... args) {
+    public @NotNull Message format(final @NonNull Object... args) {
         List<String> cloned = new ArrayList<>(lines);
 
         for (int i = 0; i < cloned.size(); i++) {

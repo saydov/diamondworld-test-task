@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnmodifiableView;
 import ru.saydov.bosses.api.hologram.model.lines.HologramLine;
 
@@ -21,18 +22,18 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SimpleHologram implements Hologram {
 
-    @NonNull Location location;
+    @NotNull Location location;
 
-    @NonNull List<HologramLine> hologramLines;
+    @NotNull List<HologramLine> hologramLines;
 
-    @NonNull Set<Player> players;
+    @NotNull Set<Player> players;
 
-    public static @NonNull SimpleHologram create(final @NonNull Location location) {
+    public static @NotNull SimpleHologram create(final @NonNull Location location) {
         return new SimpleHologram(location, new ObjectArrayList<>(), new ObjectOpenHashSet<>());
     }
 
     @Override
-    public @NonNull @UnmodifiableView List<HologramLine> getLines() {
+    public @NotNull @UnmodifiableView List<HologramLine> getLines() {
         return Collections.unmodifiableList(hologramLines);
     }
 
@@ -75,7 +76,7 @@ public class SimpleHologram implements Hologram {
     }
 
     @Override
-    public @NonNull @UnmodifiableView Set<Player> getViewers() {
+    public @NotNull @UnmodifiableView Set<Player> getViewers() {
         return Collections.unmodifiableSet(players);
     }
 

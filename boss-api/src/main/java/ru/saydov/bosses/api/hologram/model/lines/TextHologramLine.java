@@ -6,6 +6,7 @@ import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import ru.saydov.bosses.api.entity.impl.PacketArmorStandImpl;
 import ru.saydov.bosses.api.entity.interfaces.PacketEntity;
 import ru.saydov.bosses.api.hologram.model.Hologram;
@@ -17,13 +18,13 @@ import ru.saydov.bosses.api.hologram.model.Hologram;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class TextHologramLine implements HologramLine {
 
-    @NonNull String text;
+    @NotNull String text;
 
-    @NonNull Location location;
+    @NotNull Location location;
 
-    @NonNull Hologram hologram;
+    @NotNull Hologram hologram;
 
-    @NonNull PacketEntity entity;
+    @NotNull PacketEntity entity;
 
     private TextHologramLine(final @NonNull String text,
                              final @NonNull Location location,

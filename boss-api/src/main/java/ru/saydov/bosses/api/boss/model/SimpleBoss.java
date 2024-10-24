@@ -10,6 +10,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -23,9 +24,9 @@ import java.util.Optional;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SimpleBoss implements Boss {
 
-    @NonNull Location location;
+    @NotNull Location location;
 
-    @NonNull EntityType entityType;
+    @NotNull EntityType entityType;
 
     @Nullable String customName;
 
@@ -34,7 +35,7 @@ public class SimpleBoss implements Boss {
     @NonFinal @Nullable LivingEntity entity;
 
     @Override
-    public @NonNull Optional<LivingEntity> getEntity() {
+    public @NotNull Optional<LivingEntity> getEntity() {
         return Optional.ofNullable(entity);
     }
 
