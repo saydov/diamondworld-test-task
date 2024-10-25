@@ -56,13 +56,15 @@ public final class BossApi implements Loadable {
     public void load() {
         this.hologramManager = SimpleHologramManager.create();
         this.bossManager = SimpleBossManager.create();
-        this.entityManager = SimpleEntityManager.create();
+        this.entityManager = SimpleEntityManager.create(javaPlugin);
         this.generalConfig = SimpleGeneralConfig.create(javaPlugin);
 
+        generalConfig.load();
         NmsUtil.init(javaPlugin);
         initSQLite0();
     }
 
+    @SneakyThrows
     @SuppressWarnings("ResultOfMethodCallIgnored")
     private void initSQLite0() {
         val file = javaPlugin.getDataFolder()
@@ -70,7 +72,7 @@ public final class BossApi implements Loadable {
                 .resolve(generalConfig.getDatabaseFileName())
                 .toFile();
 
-        if (!file.exists()) file.mkdir();
+        if (!file.exists()) file.createNewFile();
 
         val config = new HikariConfig();
         config.setDriverClassName("org.sqlite.JDBC");

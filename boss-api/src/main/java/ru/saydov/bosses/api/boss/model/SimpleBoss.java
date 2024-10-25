@@ -28,11 +28,16 @@ public class SimpleBoss implements Boss {
 
     @NotNull EntityType entityType;
 
-    @Nullable String customName;
+    @Nullable
+    String customName;
 
     double maxHealth, damage;
 
-    @NonFinal @Nullable LivingEntity entity;
+    @NonFinal
+    @Nullable
+    LivingEntity entity;
+    @NonFinal
+    Map<EquipmentSlot, ItemStack> equipment;
 
     @Override
     public @NotNull Optional<LivingEntity> getEntity() {
@@ -78,8 +83,6 @@ public class SimpleBoss implements Boss {
 
         entity.setHealth(health);
     }
-
-    @NonFinal Map<EquipmentSlot, ItemStack> equipment;
 
     @Override
     public boolean setEquipment(@NonNull Map<EquipmentSlot, ItemStack> equip) {

@@ -1,13 +1,13 @@
 package ru.saydov.bosses.api.entity;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import ru.saydov.bosses.api.entity.interfaces.PacketEntity;
+import ru.saydov.bosses.api.entity.listener.EntityListener;
 import ru.saydov.bosses.api.utils.Manager;
 
 import java.util.Collections;
@@ -21,10 +21,18 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public final class SimpleEntityManager implements Manager<PacketEntity> {
 
+    @NotNull JavaPlugin javaPlugin;
+
     @NotNull Set<PacketEntity> entities;
 
-    public static @NotNull Manager<PacketEntity> create() {
-        return new SimpleEntityManager(new ObjectOpenHashSet<>());
+    public static @NotNull Manager<PacketEntity> create(
+            final @NonNull JavaPlugin javaPlugin
+    ) {
+        val instance = new SimpleEntityManager(javaPlugin, new ObjectOpenHashSet<>());
+
+        javaPlugin.getServer().getPluginManager()
+                .registerEvents(EntityListener.create(javaPlugin, instance), javaPlugin);
+        return instance;
     }
 
     @Override
@@ -44,7 +52,9 @@ public final class SimpleEntityManager implements Manager<PacketEntity> {
 
     @Override
     public void removeAll() {
-        entities.forEach(PacketEntity::remove);
+        Bukkit.getOnlinePlayers().forEach(player ->
+                entities.forEach(entity -> entity.remove(player)));
+
         entities.clear();
     }
 

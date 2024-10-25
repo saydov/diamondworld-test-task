@@ -39,6 +39,4 @@ public interface Boss {
 
     @NotNull Optional<LivingEntity> getEntity();
 
-
-
 }

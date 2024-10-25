@@ -55,7 +55,7 @@ public class SimpleHologram implements Hologram {
 
     @Override
     public void removeLine(@NonNull HologramLine hologramLine) {
-        hologramLine.remove();
+      //  hologramLine.remove();
         hologramLines.remove(hologramLine);
     }
 
@@ -66,14 +66,14 @@ public class SimpleHologram implements Hologram {
         }
 
         val hologramLine = hologramLines.get(index);
-        hologramLine.remove();
+        //hologramLine();
 
         hologramLines.remove(index);
     }
 
     @Override
     public void clearLines() {
-        hologramLines.forEach(HologramLine::remove);
+        //hologramLines.forEach(HologramLine::remove);
         hologramLines.clear();
     }
 
@@ -96,11 +96,11 @@ public class SimpleHologram implements Hologram {
 
     @Override
     public void spawn() {
-        hologramLines.forEach(HologramLine::spawn);
+       // hologramLines.forEach(HologramLine::spawn);
     }
 
     @Override
     public void remove() {
-        hologramLines.forEach(HologramLine::remove);
+        //hologramLines.forEach(HologramLine::remove);
     }
 }

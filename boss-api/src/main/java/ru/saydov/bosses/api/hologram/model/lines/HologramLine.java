@@ -1,6 +1,5 @@
 package ru.saydov.bosses.api.hologram.model.lines;
 
-import lombok.NonNull;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -20,8 +19,5 @@ public interface HologramLine {
 
     void showTo(final Player player);
     void hideFrom(final Player player);
-
-    void spawn();
-    void remove();
 
 }

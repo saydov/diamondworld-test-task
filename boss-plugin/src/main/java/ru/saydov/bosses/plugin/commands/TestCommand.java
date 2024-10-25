@@ -37,19 +37,21 @@ public class TestCommand {
         if (!(sender instanceof Player player))
             return;
 
-        bossApi.getEntityManager().registerEntity(createArmorStand(player.getLocation()
+        bossApi.getEntityManager().registerEntity(createArmorStand(player, player.getLocation()
                 .clone().add(1, 0, 0)));
 
         player.sendMessage(Component.text("Entity created!")
                 .color(NamedTextColor.GREEN));
     }
 
-    private @NotNull PacketEntity createArmorStand(final @NonNull Location location) {
+    private @NotNull PacketEntity createArmorStand(
+            final @NonNull Player player, final @NonNull Location location
+    ) {
         val impl = PacketArmorStandImpl.create(location);
 
         impl.setCustomNameVisible(true);
         impl.setCustomName("DiamondWorld Test Task");
-        impl.spawn();
+        impl.spawn(player);
 
         return impl;
     }

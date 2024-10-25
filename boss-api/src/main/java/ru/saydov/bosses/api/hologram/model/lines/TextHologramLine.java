@@ -46,22 +46,12 @@ public class TextHologramLine implements HologramLine {
 
     @Override
     public void showTo(Player player) {
-        entity.addViewer(player);
+        entity.spawn(player);
     }
 
     @Override
     public void hideFrom(Player player) {
-        entity.removeViewer(player);
-    }
-
-    @Override
-    public void spawn() {
-        entity.spawn();
-    }
-
-    @Override
-    public void remove() {
-        entity.remove();
+        entity.remove(player);
     }
 
 }

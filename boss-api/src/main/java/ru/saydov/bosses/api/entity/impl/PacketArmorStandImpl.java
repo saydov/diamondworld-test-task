@@ -25,7 +25,7 @@ public class PacketArmorStandImpl extends PacketEntityBaseImpl implements Packet
     @Override
     public @NotNull EntityType getEntityType() {
         return EntityType.ARMOR_STAND;
-    }
+     }
 
     boolean small = false, invisible = true, arms = false;
 

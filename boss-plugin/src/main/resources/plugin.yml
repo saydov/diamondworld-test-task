@@ -1,1 +1,6 @@
-main
+main: "ru.saydov.bosses.plugin.BossesPlugin"
+name: "BossesTestPlugin"
+
+version: "${version}"
+author: "saydov"
+depend: [ "ProtocolLib" ]
