@@ -11,7 +11,6 @@ dependencies {
 
 processResources {
     inputs.property "version", project.version
-    inputs.property "main", "ru.saydov.bosses.plugin"
 
     filesMatching("plugin.yml") {
         expand "version": project.version
@@ -21,6 +20,5 @@ processResources {
 tasks {
     shadowJar {
         archiveFileName = 'BossesPlugin.jar'
-        destinationDirectory = file("../../Desktop/test-server/plugins")
     }
 }

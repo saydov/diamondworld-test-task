@@ -1,5 +1,6 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "7.0.0" apply false
+    id "io.papermc.paperweight.userdev" version "1.5.5" apply false
 }
 
 allprojects {
@@ -11,6 +12,7 @@ configure(subprojects) {
     apply plugin: "java"
     apply plugin: "java-library"
     apply plugin: "com.github.johnrengelman.shadow"
+    apply plugin: "io.papermc.paperweight.userdev"
 
     apply from: new File(rootDir, "libs.gradle")
 
@@ -19,11 +21,14 @@ configure(subprojects) {
         mavenLocal()
 
         maven { url "https://papermc.io/repo/repository/maven-public/" }
+        maven { url "https://jitpack.io" }
         maven { url "https://repo.dmulloy2.net/repository/public/" }
+        maven { url "https://repo.purpurmc.org/snapshots" }
     }
 
     dependencies {
-        compileOnly libs.bukkit
+        paperweightDevelopmentBundle libs.bukkit
+
         compileOnly libs.protocollib
 
         implementation libs.jdbi.core
@@ -31,6 +36,8 @@ configure(subprojects) {
         implementation libs.jdbi.caffeine
 
         implementation libs.hikari
+
+        compileOnly libs.jetbrains
 
         implementation libs.cache
         implementation libs.guice
