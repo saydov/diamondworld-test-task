@@ -45,7 +45,9 @@ public interface PacketEntity {
     void addViewer(final @NonNull Player player);
     void removeViewer(final @NonNull Player player);
 
+    void spawn();
     void spawn(final @NonNull Player player);
+    void remove();
     void remove(final @NonNull Player player);
 
 }

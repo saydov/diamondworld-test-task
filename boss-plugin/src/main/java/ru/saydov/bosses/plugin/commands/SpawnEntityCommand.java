@@ -23,13 +23,13 @@ import ru.saydov.bosses.api.entity.interfaces.PacketEntity;
  */
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@Command(name = "test", aliases = "dwbestproject")
-public class TestCommand {
+@Command(name = "spawnentity", aliases = "sentity")
+public class SpawnEntityCommand {
 
     BossApi bossApi;
 
-    public static @NotNull TestCommand create(final @NonNull BossApi bossApi) {
-        return new TestCommand(bossApi);
+    public static @NotNull SpawnEntityCommand create(final @NonNull BossApi bossApi) {
+        return new SpawnEntityCommand(bossApi);
     }
 
     @Execute

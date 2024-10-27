@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -55,7 +56,7 @@ public class SimpleHologram implements Hologram {
 
     @Override
     public void removeLine(@NonNull HologramLine hologramLine) {
-      //  hologramLine.remove();
+        hologramLine.remove();
         hologramLines.remove(hologramLine);
     }
 
@@ -66,14 +67,14 @@ public class SimpleHologram implements Hologram {
         }
 
         val hologramLine = hologramLines.get(index);
-        //hologramLine();
+        hologramLine.remove();
 
         hologramLines.remove(index);
     }
 
     @Override
     public void clearLines() {
-        //hologramLines.forEach(HologramLine::remove);
+        hologramLines.forEach(HologramLine::remove);
         hologramLines.clear();
     }
 
@@ -96,11 +97,11 @@ public class SimpleHologram implements Hologram {
 
     @Override
     public void spawn() {
-       // hologramLines.forEach(HologramLine::spawn);
+//        hologramLines.forEach(HologramLine::spawn);
     }
 
     @Override
     public void remove() {
-        //hologramLines.forEach(HologramLine::remove);
+        hologramLines.forEach(HologramLine::remove);
     }
 }

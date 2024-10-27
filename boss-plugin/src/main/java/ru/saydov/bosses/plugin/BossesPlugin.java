@@ -7,7 +7,7 @@ import lombok.experimental.FieldDefaults;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.saydov.bosses.api.BossApi;
-import ru.saydov.bosses.plugin.commands.TestCommand;
+import ru.saydov.bosses.plugin.commands.SpawnEntityCommand;
 
 /**
  * @author saydov
@@ -24,8 +24,8 @@ public final class BossesPlugin extends JavaPlugin {
         bossApi = BossApi.create(this);
         bossApi.load();
 
-        builder = LiteBukkitFactory.builder("diamond-world-in-the-heart")
-                .commands(TestCommand.create(bossApi))
+        builder = LiteBukkitFactory.builder("boss-api")
+                .commands(SpawnEntityCommand.create(bossApi))
                 .build();
         builder.register();
     }

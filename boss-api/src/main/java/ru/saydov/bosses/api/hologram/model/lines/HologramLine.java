@@ -20,4 +20,6 @@ public interface HologramLine {
     void showTo(final Player player);
     void hideFrom(final Player player);
 
+    void remove();
+
 }

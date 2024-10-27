@@ -6,11 +6,16 @@ bosses:
     entity-type: ZOMBIE
     max-health: 1500
     damage: 20
+    custom-name: "<green><bold>ПРИЗЫВАТПЕЛЬ"
+    time-to-spawn:
+      zone: "Europe/Moscow"
+      values:
+        - "12:00"
     locations:
       - 'world, 0, 100, 0' # без yaw, pitch
       - 'world, 0, 100, 0, 0, 0' # с yaw, pitch
     equipment:
-      HELMET:
+      HEAD:
         material: 'DIAMOND_HELMET'
         enchantments:
           PROTECTION_ENVIRONMENTAL: 4
@@ -28,12 +33,13 @@ bosses:
   destroyer:
     entity-type: ZOMBIE
     max-health: 1000
-    damage: 70
+    damage: 7
+    custom-name: "#BBBBB&lРАЗРУШИТЕЛЬ"
     locations:
       - 'world, 0, 100, 0' # без yaw, pitch
       - 'world, 0, 100, 0, 0, 0' # с yaw, pitch
     equipment:
-      MAIN:
+      MAINHAND:
         material: 'DIAMOND_HELMET'
         enchantments:
           PROTECTION_ENVIRONMENTAL: 4

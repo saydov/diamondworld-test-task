@@ -20,24 +20,25 @@ import java.util.Optional;
  * @author saydov
  */
 @Getter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(onlyExplicitlyIncluded = true)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SimpleBoss implements Boss {
 
+    @EqualsAndHashCode.Include @ToString.Include
     @NotNull Location location;
 
+    @EqualsAndHashCode.Include @ToString.Include
     @NotNull EntityType entityType;
 
-    @Nullable
-    String customName;
+    @Nullable String customName;
 
+    @EqualsAndHashCode.Include @ToString.Include
     double maxHealth, damage;
 
-    @NonFinal
-    @Nullable
-    LivingEntity entity;
-    @NonFinal
-    Map<EquipmentSlot, ItemStack> equipment;
+    @NonFinal @Nullable LivingEntity entity;
+    @NonFinal Map<EquipmentSlot, ItemStack> equipment;
 
     @Override
     public @NotNull Optional<LivingEntity> getEntity() {

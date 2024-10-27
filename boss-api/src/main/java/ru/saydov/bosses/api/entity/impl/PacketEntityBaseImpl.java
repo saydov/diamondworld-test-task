@@ -9,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -119,6 +120,12 @@ public abstract class PacketEntityBaseImpl implements PacketEntity {
 
     @Override
     public void spawn(final @NonNull Player player) {
+        // Игрок уже видит энтити, пропускаем спавн
+        // а также, лишнюю отправку пакетов
+
+        // (?) Может быть сделать выполнение метода PacketEntity#remove
+        if (players.contains(player)) return;
+
         val packet = new PacketContainer(PacketType.Play.Server.SPAWN_ENTITY);
 
         //base
@@ -148,6 +155,19 @@ public abstract class PacketEntityBaseImpl implements PacketEntity {
 
         PROTOCOL_MANAGER.sendServerPacket(player, packet);
         addViewer(player);
+    }
+
+    @Override
+    public void spawn() {
+        Bukkit.getOnlinePlayers().forEach(this::spawn);
+    }
+
+    @Override
+    public void remove() {
+        val packet = new PacketContainer(PacketType.Play.Server.ENTITY_DESTROY);
+        packet.getIntegerArrays().write(0, new int[]{entityId});
+
+        PROTOCOL_MANAGER.broadcastServerPacket(packet);
     }
 
     @Override

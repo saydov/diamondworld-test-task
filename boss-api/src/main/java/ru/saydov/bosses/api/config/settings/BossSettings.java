@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import ru.saydov.bosses.api.config.settings.time.BossTimeSettings;
 import ru.saydov.bosses.api.utils.builder.ItemBuilder;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public final class BossSettings {
             EntityType entityType;
 
             try {
-                entityType = EntityType.valueOf(key.toUpperCase());
+                entityType = EntityType.valueOf(entry.getString("entity-type"));
             } catch (final IllegalArgumentException e) {
                 javaPlugin.getLogger().warning("Invalid entity type: " + key);
                 continue;
@@ -114,8 +115,11 @@ public final class BossSettings {
                 }
             }
 
+            val timeSettings = BossTimeSettings.create(
+                    javaPlugin, section.getConfigurationSection("time"));
+
             settings.add(Setting.create(
-                            customName, entityType, locations, attributes, holoLines, equip
+                            customName, entityType, timeSettings, locations, attributes, holoLines, equip
                     )
             );
         }
@@ -130,8 +134,9 @@ public final class BossSettings {
 
         @Nullable String customName;
 
-        @NonNull
-        EntityType entityType;
+        @NotNull EntityType entityType;
+
+        @Nullable BossTimeSettings timeSettings;
 
         @NotNull Set<Location> locations;
 
@@ -145,13 +150,15 @@ public final class BossSettings {
                 // мне кажется, это конечно пи3да
                 final @Nullable String customName,
                 final @NonNull EntityType entityType,
+                final @Nullable BossTimeSettings timeSettings,
                 final @NonNull Set<Location> locations,
                 final @NonNull Map<Attribute, Integer> attributes,
                 final @Nullable List<String> holoLines,
                 final @Nullable Map<EnumWrappers.ItemSlot, ItemStack> equipment
         ) {
             return new Setting(
-                    customName, entityType, locations, attributes, holoLines, equipment
+                    customName, entityType, timeSettings, locations,
+                    attributes, holoLines, equipment
             );
         }
 

@@ -54,4 +54,8 @@ public class TextHologramLine implements HologramLine {
         entity.remove(player);
     }
 
+    @Override
+    public void remove() {
+        entity.remove();
+    }
 }
